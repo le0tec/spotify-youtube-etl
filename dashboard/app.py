@@ -28,14 +28,6 @@ top_n = st.sidebar.slider(
     10
 )
 
-
-st.title("🎵 Spotify & YouTube Analytics Dashboard")
-
-st.markdown("""
-Análise de tendências musicais e audiovisuais
-""")
-
-
 avg_popularity = spotify['popularity'].mean()
 
 total_views = youtube['views'].sum()
