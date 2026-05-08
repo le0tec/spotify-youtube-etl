@@ -3,11 +3,11 @@ import pandas as pd
 import plotly.express as px
 
 
-st.set_page_config(
-    page_title="Spotify & YouTube Analytics",
-    layout="wide",
-    page_icon="🎵"
-)
+st.title("🎵 Spotify & YouTube Trend Analytics")
+
+st.markdown("""
+### Dashboard interativo para análise de tendências musicais e audiovisuais
+""")
 
 
 spotify = pd.read_csv(
@@ -42,6 +42,18 @@ total_views = youtube['views'].sum()
 
 avg_engagement = youtube['engagement'].mean()
 
+top_music = spotify.sort_values(
+    by="popularity",
+    ascending=False
+).iloc[0]['music_name']
+
+top_video = youtube.sort_values(
+    by="views",
+    ascending=False
+).iloc[0]['title']
+
+total_likes = youtube['likes'].sum()
+
 col1, col2, col3 = st.columns(3)
 
 col1.metric(
@@ -59,6 +71,13 @@ col3.metric(
     round(avg_engagement, 4)
 )
 
+st.markdown("---")
+
+st.success(f"🎵 Música destaque: {top_music}")
+
+st.info(f"📺 Vídeo destaque: {top_video}")
+
+st.warning(f"👍 Total de likes: {total_likes:,}")
 
 st.subheader("🎶 Top músicas mais populares")
 
@@ -77,7 +96,8 @@ fig_spotify = px.bar(
 
 fig_spotify.update_layout(
     xaxis_title="Música",
-    yaxis_title="Popularidade"
+    yaxis_title="Popularidade",
+    template="plotly_dark"
 )
 
 st.plotly_chart(
@@ -103,7 +123,8 @@ fig_youtube = px.bar(
 
 fig_youtube.update_layout(
     xaxis_title="Vídeo",
-    yaxis_title="Visualizações"
+    yaxis_title="Visualizações",
+    template="plotly_dark"
 )
 
 st.plotly_chart(
@@ -123,11 +144,32 @@ fig_engagement = px.scatter(
     hover_name="title"
 )
 
+fig_engagement.update_layout(
+    template="plotly_dark"
+)
+
 st.plotly_chart(
     fig_engagement,
     use_container_width=True
 )
 
+st.markdown("---")
+
+st.subheader("🏆 Ranking Top 5 Spotify")
+
+st.table(
+    spotify_top[
+        ['music_name', 'artist', 'popularity']
+    ].head(5)
+)
+
+st.subheader("🏆 Ranking Top 5 YouTube")
+
+st.table(
+    youtube_top[
+        ['title', 'channel', 'views']
+    ].head(5)
+)
 
 st.subheader("📋 Dados Spotify")
 
