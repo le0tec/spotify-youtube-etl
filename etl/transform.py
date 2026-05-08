@@ -2,9 +2,6 @@ import pandas as pd
 
 print("Iniciando transformação dos dados...")
 
-# =========================
-# SPOTIFY
-# =========================
 
 spotify = pd.read_csv("data/raw/spotify_tracks.csv")
 
@@ -16,9 +13,6 @@ spotify['duration_minutes'] = spotify['duration_minutes'].round(2)
 
 spotify['platform'] = 'Spotify'
 
-# =========================
-# YOUTUBE
-# =========================
 
 youtube = pd.read_csv("data/raw/youtube_videos.csv")
 
@@ -38,9 +32,6 @@ youtube['engagement'] = youtube['engagement'].round(4)
 
 youtube['platform'] = 'YouTube'
 
-# =========================
-# SALVAR
-# =========================
 
 spotify.to_csv(
     "data/processed/spotify_clean.csv",

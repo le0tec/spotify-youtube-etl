@@ -32,7 +32,7 @@ top_n = st.sidebar.slider(
 st.title("🎵 Spotify & YouTube Analytics Dashboard")
 
 st.markdown("""
-Dashboard interativo para análise de tendências musicais e audiovisuais.
+Análise de tendências musicais e audiovisuais
 """)
 
 
@@ -45,17 +45,17 @@ avg_engagement = youtube['engagement'].mean()
 col1, col2, col3 = st.columns(3)
 
 col1.metric(
-    "🎧 Músicas Spotify",
+    "🎧 Spotify",
     len(spotify)
 )
 
 col2.metric(
-    "📺 Total Views YouTube",
+    "📺 Views do YouTube",
     f"{total_views:,}"
 )
 
 col3.metric(
-    "🔥 Média Engajamento",
+    "🔥 Engajamento",
     round(avg_engagement, 4)
 )
 
@@ -112,7 +112,7 @@ st.plotly_chart(
 )
 
 
-st.subheader("🔥 Engajamento dos vídeos")
+st.subheader("🔥 Ranking de Engajamento")
 
 fig_engagement = px.scatter(
     youtube,
@@ -147,7 +147,7 @@ st.dataframe(
 st.markdown("---")
 
 st.markdown("""
-Projeto ETL desenvolvido com:
+Desenvolvido com:
 - Python
 - Spotify API
 - YouTube API
