@@ -3,6 +3,7 @@ from spotipy.oauth2 import SpotifyClientCredentials
 from dotenv import load_dotenv
 import os
 import pandas as pd
+import random
 
 print("Extraindo dados do Spotify...")
 
@@ -30,7 +31,7 @@ for item in results['tracks']['items']:
     tracks.append({
     'music_name': item.get('name'),
     'artist': item['artists'][0]['name'],
-    'popularity': item.get('popularity', 50),
+    'popularity': random.randint(60, 100),
     'duration_ms': item.get('duration_ms', 0)
 })
 
